@@ -1,3 +1,5 @@
 [submodule "indexed_zstd/libzstd-seek"]
 	path = indexed_zstd/libzstd-seek
 	url = https://github.com/martinellimarco/libzstd-seek
+[submodule "libzstd-seek"]
+	url = https://github.com/ap--/libzstd-seek.git
