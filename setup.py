@@ -8,7 +8,6 @@ from setuptools.extension import Extension
 from Cython.Build import cythonize
 
 
-
 if platform.system() == "Darwin":
     extra_compile_args = [ '-std=c++17', '-O3', '-DNDEBUG', '-stdlib=libc++', '-mmacosx-version-min=10.9']
     extra_link_args    = [ '-lzstd', '-stdlib=libc++', '-mmacosx-version-min=10.9' ]
@@ -19,9 +18,9 @@ if platform.system() == "Darwin":
 elif platform.system() == "Windows":
     extra_compile_args = [ '/std:c++17', '/O2', '/DNDEBUG' ]  # FIXME
     extra_link_args    = []
-    include_dirs       = [ os.path.join(os.environ["CONDA_PREFIX"], 'Library/include') ]  # FIXME
-    libraries          = [ 'zstd' ]
-    library_dirs       = [ os.path.join(os.environ["CONDA_PREFIX"], 'Library/lib') ]  # FIXME
+    include_dirs       = [ 'libzstd/include' ]
+    libraries          = [ 'libzstd' ]
+    library_dirs       = [ 'libzstd/lib' ]
 
 else:
     extra_compile_args = [ '-std=c++17', '-O3', '-DNDEBUG' ]
