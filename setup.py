@@ -16,11 +16,14 @@ if platform.system() == "Darwin":
     library_dirs       = []
 
 elif platform.system() == "Windows":
+    _pkg_dir = os.path.dirname(__file__)
+    LIBZSTD_DIR = os.getenv('LIBZSTD_DIR', os.path.join(_pkg_dir, 'libzstd'))
+
     extra_compile_args = [ '/std:c++17', '/O2', '/DNDEBUG' ]  # FIXME
     extra_link_args    = []
-    include_dirs       = [ 'libzstd/include' ]
+    include_dirs       = [ os.path.join(LIBZSTD_DIR, 'include') ]
     libraries          = [ 'libzstd' ]
-    library_dirs       = [ 'libzstd/lib' ]
+    library_dirs       = [ os.path.join(LIBZSTD_DIR, 'lib') ]
 
 else:
     extra_compile_args = [ '-std=c++17', '-O3', '-DNDEBUG' ]
@@ -28,8 +31,6 @@ else:
     include_dirs       = [ '.' ]
     libraries          = [ 'm' ]
     library_dirs       = []
-
-
 
 
 extensions = [

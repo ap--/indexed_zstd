@@ -84,6 +84,8 @@ jobs:
 
     - name: Test Installation From Tarball
       shell: bash
+      env:
+        LIBZSTD_DIR: ${{ github.workspace }}\libzstd  # windows
       run: |
         python3 setup.py sdist
         twine check dist/*
