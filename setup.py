@@ -87,7 +87,6 @@ setup(
     long_description = readmeContents,
     long_description_content_type = 'text/markdown',
 
-    py_modules       = [ 'indexed_zstd' ],
     libraries        = [ zstd_seek ],
     ext_modules      = extensions
 )
