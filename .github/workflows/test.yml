@@ -37,8 +37,8 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: |
         python libzstd/_get_zstd.py
-        copy libzstd/lib/libzstd.dll C:\Windows\SysWOW64\
-        regsvr32 C:\Windows\SysWOW64\libzstd.dll
+        copy libzstd/lib/libzstd.dll C:\Windows\System32\
+        regsvr32 C:\Windows\System32\libzstd.dll
 
     - name: Install Python Modules
       run: |
