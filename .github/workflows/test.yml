@@ -37,7 +37,8 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: |
         python libzstd/_get_zstd.py
-        copy libzstd/lib/libzstd.dll  C:\Windows\SysWOW64\
+        copy libzstd/lib/libzstd.dll C:\Windows\SysWOW64\
+        regsvr32 C:\Windows\SysWOW64\libzstd.dll
 
     - name: Install Python Modules
       run: |
@@ -52,13 +53,6 @@ jobs:
         python3 setup.py sdist
         twine check dist/*
         python3 -m pip install dist/*.tar.gz
-
-    - name: Windows install libzstd.dll
-      if: matrix.os == 'windows-latest'
-      env:
-        LIBZSTD_DIR: ${{ github.workspace }}\libzstd  # windows
-      run: |
-        regsvr32 $env:LIBZSTD_DIR\lib\libzstd.dll
 
     - name: Test ZSTD Decoder Python Package
       # indexed_zstd should be installed for this step!
