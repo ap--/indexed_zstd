@@ -28,12 +28,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install Dependencies
+    - name: Install Dependencies (ubuntu)
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt-get -y install libzstd-dev g++
 
-    - name: Install Dependencies
+    - name: Install Dependencies (windows)
       if: matrix.os == 'windows-latest'
       run: |
         python libzstd/_get_zstd.py
@@ -51,6 +51,13 @@ jobs:
         python3 setup.py sdist
         twine check dist/*
         python3 -m pip install dist/*.tar.gz
+
+    - name: Windows install libzstd.dll
+      if: matrix.os == 'windows-latest'
+      env:
+        LIBZSTD_DIR: ${{ github.workspace }}\libzstd  # windows
+      run: |
+        regsvr32 $env:LIBZSTD_DIR\lib\libzstd.dll
 
     - name: Test ZSTD Decoder Python Package
       # indexed_zstd should be installed for this step!
